@@ -1,3 +1,5 @@
+// main.rs
+// Main controller: loads graph, runs preprocessing, computes shortest paths and centralities, and prints results
 mod graph;
 mod bfs;
 mod centrality;
@@ -7,20 +9,20 @@ use graph::Graph;
 use bfs::average_shortest_path;
 use centrality::{degree_centrality, closeness_centrality, betweenness_centrality};
 
-
+/// Finds all nodes with no edges
 fn find_isolated_nodes(graph: &Graph) -> Vec<usize> {
     graph.nodes()
         .into_iter()
         .filter(|&node| graph.neighbors(node).map_or(true, |n| n.is_empty()))
         .collect()
 }
-
+/// Returns the node with the highest degree (most connections)
 fn find_most_connected(graph: &Graph) -> Option<(usize, usize)> {
     graph.nodes().into_iter()
         .map(|node| (node, graph.neighbors(node).map_or(0, |n| n.len())))
         .max_by_key(|&(_, degree)| degree)
 }
-
+/// Computes the average degree across all nodes in the graph
 fn average_degree(graph: &Graph) -> f64 {
     let total_deg: usize = graph.nodes()
         .into_iter()
