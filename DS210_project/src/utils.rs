@@ -1,5 +1,8 @@
+// utils.rs
+// Provides utility functions for displaying top-N results from centrality metrics.
 use std::collections::HashMap;
 
+/// Prints the top-N entries from a centrality map, sorted in descending order of scores.
 pub fn print_top<T: PartialOrd + Copy + std::fmt::Display>(
     map: &HashMap<usize, T>,
     top_n: usize,
