@@ -1,6 +1,11 @@
+// bfs.rs
+// Implements Breadth-First Search for computing shortest paths and estimating average distances.
+
 use rand::seq::SliceRandom;
 use std::collections::{HashMap, VecDeque};
 use crate::graph::Graph;
+
+/// Estimates the average shortest path by sampling random node pairs and computing distances.
 
 pub fn average_shortest_path(graph: &Graph, samples: usize) -> f64 {
     let mut rng = rand::thread_rng();
@@ -25,6 +30,8 @@ pub fn average_shortest_path(graph: &Graph, samples: usize) -> f64 {
 
     total as f64 / count as f64
 }
+
+/// Computes the shortest path between two nodes using BFS.
 
 pub fn bfs_distance(graph: &Graph, start: usize, goal: usize) -> Option<usize> {
     let mut visited: HashMap<usize, usize> = HashMap::new();
