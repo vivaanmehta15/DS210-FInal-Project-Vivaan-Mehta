@@ -1,9 +1,16 @@
+// centrality.rs
+// Computes degree, closeness, and betweenness centrality measures on the graph.
+
 use std::collections::{HashMap, VecDeque};
 use crate::graph::Graph;
+
+/// Computes degree centrality: number of direct neighbors for each node.
 
 pub fn degree_centrality(graph: &Graph) -> HashMap<usize, usize> {
     graph.adj.iter().map(|(&k, v)| (k, v.len())).collect()
 }
+
+/// Computes closeness centrality: inverse of total distance to all reachable nodes.
 
 pub fn closeness_centrality(graph: &Graph) -> HashMap<usize, f64> {
     let mut result = HashMap::new();
@@ -30,6 +37,8 @@ pub fn closeness_centrality(graph: &Graph) -> HashMap<usize, f64> {
     }
     result
 }
+
+/// Computes betweenness centrality using Brandes' algorithm.
 
 pub fn betweenness_centrality(graph: &Graph) -> HashMap<usize, f64> {
     let mut betweenness = HashMap::new();
